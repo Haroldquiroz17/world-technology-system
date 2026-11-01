@@ -1326,3 +1326,40 @@ video {
     max-width: 100%;
   }
 }
+
+/* ===== MENÚ RESPONSIVE MÓVIL ===== */
+@media (max-width: 991.98px) {
+
+  .navbar-collapse {
+    background: #EAF5EF !important;
+    padding: 16px 18px 20px;
+    margin-top: 12px;
+    border: 1px solid #DCEBE3;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(7, 48, 35, 0.10);
+  }
+
+  .navbar-collapse .nav-link {
+    color: #19352D !important;
+    font-weight: 600;
+    padding: 12px 15px !important;
+    margin: 3px 0;
+    border-radius: 10px;
+    border-bottom: none !important;
+    transition: background-color 0.25s ease,
+                color 0.25s ease,
+                padding-left 0.25s ease;
+  }
+
+  .navbar-collapse .nav-link:hover,
+  .navbar-collapse .nav-link:focus {
+    background: #D5EEE1 !important;
+    color: #059669 !important;
+    padding-left: 21px !important;
+  }
+
+  .navbar-collapse .nav-link.active {
+    background: #D5EEE1 !important;
+    color: #059669 !important;
+  }
+}
