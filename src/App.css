@@ -1327,39 +1327,51 @@ video {
   }
 }
 
-/* ===== MENÚ RESPONSIVE MÓVIL ===== */
-@media (max-width: 991.98px) {
 
-  .navbar-collapse {
+/* ===== MENÚ MÓVIL WTS - DISEÑO MENTA ===== */
+@media (max-width: 700px) {
+
+  .site-header .nav-links,
+  .site-header .nav-links.nav-links-open {
     background: #EAF5EF !important;
-    padding: 16px 18px 20px;
-    margin-top: 12px;
-    border: 1px solid #DCEBE3;
-    border-radius: 18px;
-    box-shadow: 0 12px 30px rgba(7, 48, 35, 0.10);
+    border: 1px solid #DCEBE3 !important;
+    border-top: none !important;
+    border-radius: 0 0 18px 18px !important;
+    padding: 14px 18px 20px !important;
+    box-shadow: 0 12px 25px rgba(7, 48, 35, 0.10) !important;
   }
 
-  .navbar-collapse .nav-link {
+  .site-header .nav-links > a {
+    display: block;
+    width: 100%;
+    padding: 14px 15px !important;
+    margin: 3px 0 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    background: transparent !important;
     color: #19352D !important;
-    font-weight: 600;
-    padding: 12px 15px !important;
-    margin: 3px 0;
-    border-radius: 10px;
-    border-bottom: none !important;
-    transition: background-color 0.25s ease,
-                color 0.25s ease,
-                padding-left 0.25s ease;
+    font-weight: 650 !important;
+    transition: all 0.25s ease !important;
   }
 
-  .navbar-collapse .nav-link:hover,
-  .navbar-collapse .nav-link:focus {
+  .site-header .nav-links > a:hover,
+  .site-header .nav-links > a:focus {
     background: #D5EEE1 !important;
     color: #059669 !important;
-    padding-left: 21px !important;
+    padding-left: 22px !important;
   }
 
-  .navbar-collapse .nav-link.active {
-    background: #D5EEE1 !important;
+  .site-header .nav-links .nav-contact {
+    margin-top: 10px !important;
+    padding: 13px !important;
+    border: 1px solid #CDE5D7 !important;
+    border-radius: 10px !important;
+    background: #FFFFFF !important;
+    color: #19352D !important;
+    text-align: center;
+  }
+
+  .site-header .nav-links .nav-contact span {
     color: #059669 !important;
   }
 }
