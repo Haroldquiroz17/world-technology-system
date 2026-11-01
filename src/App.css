@@ -784,8 +784,8 @@ video {
   gap: 25px;
   min-height: 100px;
   padding: 25px max(24px, calc((100vw - 1180px) / 2));
-  border-top: 1px solid rgba(167, 243, 208, 0.22);
-  background: var(--green-dark);
+  border-top: 1px solid #CDE5D7;
+  background: #EAF5EF;
 }
 
 .site-footer .brand-logo-full {
@@ -794,10 +794,20 @@ video {
 }
 
 .site-footer > p,
-.footer-copy {
-  color: #c6ded2;
+.site-footer .footer-copy {
+  color: #19352D;
   font-size: 10px;
   line-height: 1.7;
+}
+
+.site-footer .footer-socials a {
+  border-color: #CDE5D7;
+  color: #19352D;
+}
+
+.site-footer .footer-socials a:hover {
+  color: #FFFFFF;
+  background: #059669;
 }
 
 /* RESPONSIVE */
@@ -1260,5 +1270,59 @@ video {
 
   .contact-actions .button {
     justify-content: center;
+  }
+}
+
+/* HERO CON MODELO Y LAPTOP */
+
+.hero-visual-model {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.hero-model-glow {
+  position: absolute;
+  width: 85%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(167, 243, 208, 0.65) 0%,
+    rgba(240, 250, 245, 0.35) 48%,
+    transparent 72%
+  );
+  filter: blur(15px);
+}
+
+.hero-model-image {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  max-width: 590px;
+  height: 520px;
+  object-fit: contain;
+  object-position: center bottom;
+  transition: transform 0.4s ease;
+}
+
+.hero-model-image:hover {
+  transform: translateY(-5px);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .hero-visual-model {
+    min-height: 370px;
+  }
+
+  .hero-model-image {
+    height: 370px;
+    max-width: 100%;
   }
 }

@@ -1,0 +1,349 @@
+
+.comparator-section {
+  border-top: 1px solid var(--line);
+}
+
+.comparator-selector {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-2);
+}
+
+.comparator-selector-heading,
+.comparator-selector-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.comparator-selector-heading {
+  justify-content: space-between;
+}
+
+.comparator-selector-heading > div > svg {
+  color: var(--cyan);
+}
+
+.comparator-selector-heading strong {
+  font-size: 14px;
+}
+
+.comparator-selector-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.comparator-selector-heading > span {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.comparator-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.comparator-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.comparator-option:hover,
+.comparator-option.active {
+  border-color: var(--cyan);
+  background: #e6f7ef;
+}
+
+.comparator-option.active {
+  color: #047857;
+}
+
+.comparator-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.comparator-controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.comparator-controls button:hover {
+  color: var(--cyan);
+}
+
+.comparator-table-heading {
+  margin: 40px 0 20px;
+}
+
+.comparator-table-heading h3 {
+  margin: 9px 0 0;
+  font-size: 23px;
+  font-weight: 850;
+}
+
+.comparator-scroll {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+}
+
+.comparator-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.comparator-table th,
+.comparator-table td {
+  width: 230px;
+  padding: 19px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.comparator-table th:first-child {
+  width: 165px;
+  background: #f5faf7;
+  font-size: 12px;
+}
+
+.comparator-table thead th {
+  background: #f5faf7;
+}
+
+.comparator-table tbody tr:last-child th,
+.comparator-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.comparator-table th:last-child,
+.comparator-table td:last-child {
+  border-right: 0;
+}
+
+.comparator-service-head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-right: 15px;
+}
+
+.comparator-service-head img {
+  width: 100%;
+  height: 115px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.comparator-service-head strong {
+  font-size: 13px;
+}
+
+.comparator-service-head > span {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.comparator-service-head button {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+.comparator-service-head button:hover {
+  color: #dc2626;
+}
+
+.comparator-table td {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.comparator-positive,
+.comparator-negative {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 800;
+}
+
+.comparator-positive {
+  color: #059669;
+}
+
+.comparator-negative {
+  color: #c45a5a;
+}
+
+.comparator-list,
+.comparator-additional-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comparator-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.comparator-list li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #059669;
+}
+
+.comparator-list.excluded li svg {
+  color: #c45a5a;
+}
+
+.comparator-additional-list li {
+  display: grid;
+  gap: 3px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+}
+
+.comparator-additional-list li strong {
+  color: var(--cyan);
+}
+
+.comparator-additional-list li small {
+  font-size: 10px;
+}
+
+.comparator-price-row {
+  background: #f0faf5;
+}
+
+.comparator-price-row td strong {
+  display: block;
+  color: var(--green-medium);
+  font-size: 20px;
+}
+
+.comparator-price-row td small {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.comparator-detail-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--cyan);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.comparator-detail-button:hover {
+  background: #047857;
+}
+
+.comparator-empty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 55px 20px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.comparator-empty svg {
+  color: var(--cyan);
+}
+
+.comparator-empty h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.comparator-empty p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.comparator-disclaimer {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .comparator-selector {
+    padding: 17px;
+  }
+
+  .comparator-selector-heading {
+    align-items: flex-start;
+  }
+
+  .comparator-selector-heading > span {
+    white-space: nowrap;
+  }
+
+  .comparator-table-heading h3 {
+    font-size: 20px;
+  }
+
+  .comparator-table th,
+  .comparator-table td {
+    padding: 14px;
+  }
+}

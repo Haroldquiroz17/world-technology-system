@@ -1,0 +1,138 @@
+
+.faq-section {
+  border-top: 1px solid var(--line);
+}
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(230px, 0.7fr);
+  align-items: start;
+  gap: 30px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+
+.faq-item {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+.faq-item-active {
+  border-color: #a7dfc4;
+  background: #fbfefc;
+}
+
+.faq-item > button {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  padding: 18px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-number {
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.faq-item > button strong {
+  flex: 1;
+  font-size: 12px;
+}
+
+.faq-item > button > svg {
+  flex-shrink: 0;
+  color: var(--cyan);
+  transition: transform 0.2s ease;
+}
+
+.faq-item-active > button > svg {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  margin: 0;
+  padding: 0 20px 19px 49px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.faq-contact {
+  position: sticky;
+  top: 105px;
+  padding: 27px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+
+.faq-contact > svg {
+  color: var(--cyan);
+}
+
+.faq-contact h3 {
+  margin: 18px 0 10px;
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.faq-contact p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.faq-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 11px 13px;
+  border-radius: 8px;
+  background: var(--cyan);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.faq-contact a svg {
+  transform: rotate(-90deg);
+}
+
+@media (max-width: 750px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-contact {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-item > button {
+    gap: 9px;
+    padding: 15px 12px;
+  }
+
+  .faq-item > button strong {
+    font-size: 11px;
+  }
+
+  .faq-answer {
+    padding: 0 14px 16px 35px;
+  }
+}

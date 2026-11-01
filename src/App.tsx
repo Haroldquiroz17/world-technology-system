@@ -1,21 +1,40 @@
+
 import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
   Mail,
   MessageCircle,
   Globe,
+  Code2,
+  Layers3,
+  Smartphone,
+  Settings,
+  Database,
+  Search,
+  Menu,
+  X,
 } from "lucide-react";
 
 import ProjectDetail from "./components/ProjectDetail";
+import ServicioDetalle from "./components/ServicioDetalle";
+import ComparadorServicios from "./components/ComparadorServicios";
+import ProcesoTrabajo from "./components/ProcesoTrabajo";
+import Testimonios from "./components/Testimonios";
+import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
+
 import { projects } from "./data/projects";
+import { servicios } from "./data/servicios";
+
 import "./App.css";
+import "./App.servicios.css";
 
 const LOGO_COMPLETO = "/images/logo-wts-completo.png";
-const LOGO_SIN_TEXTO = "/images/logo-wts-icono.png";
 
 const CORREO = "hjqc@outlook.es";
 const WHATSAPP_1 = "51964618454";
 const WHATSAPP_2 = "51959349818";
+
+const PORTAFOLIO_URL = "https://portafolio-hq.vercel.app/";
 
 const MENSAJE_WHATSAPP =
   "Hola, estoy interesado en solicitar una cotización y contar con sus servicios de desarrollo. ¿Podrían brindarme más información?";
@@ -32,27 +51,46 @@ const URL_CORREO = `mailto:${CORREO}?subject=${encodeURIComponent(
   "Solicitud de cotización - World Technology System"
 )}&body=${encodeURIComponent(MENSAJE_WHATSAPP)}`;
 
+const iconosServicio = [
+  Code2,
+  Layers3,
+  Search,
+  Settings,
+  Database,
+  Settings,
+  Smartphone,
+];
+
 export default function App() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
     null
   );
+
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(
+    null
+  );
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const selectedProject =
     projects.find((project) => project.id === selectedProjectId) ?? null;
 
+  const selectedService =
+    servicios.find((service) => service.id === selectedServiceId) ?? null;
+
   useEffect(() => {
-    if (selectedProjectId) {
+    if (selectedProjectId || selectedServiceId) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [selectedProjectId]);
+  }, [selectedProjectId, selectedServiceId]);
 
-  const goToProjects = () => {
+  const goToSection = (sectionId: string) => {
     setSelectedProjectId(null);
+    setSelectedServiceId(null);
     setMenuOpen(false);
 
     window.setTimeout(() => {
-      document.getElementById("proyectos")?.scrollIntoView({
+      document.getElementById(sectionId)?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -61,8 +99,12 @@ export default function App() {
 
   const goHome = () => {
     setSelectedProjectId(null);
+    setSelectedServiceId(null);
     setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const backToServices = () => goToSection("servicios");
 
   return (
     <div className="wts">
@@ -71,7 +113,10 @@ export default function App() {
           className="brand"
           href="#inicio"
           aria-label="World Technology System - Inicio"
-          onClick={goHome}
+          onClick={(event) => {
+            event.preventDefault();
+            goHome();
+          }}
         >
           <img
             className="brand-logo-full"
@@ -87,26 +132,97 @@ export default function App() {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? "✕" : "☰"}
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
         <nav className={`nav-links ${menuOpen ? "nav-links-open" : ""}`}>
-          <a href="#inicio" onClick={goHome}>
+          <a
+            href="#inicio"
+            onClick={(event) => {
+              event.preventDefault();
+              goHome();
+            }}
+          >
             Inicio
           </a>
 
-          <a href="#proyectos" onClick={goToProjects}>
+          <a
+            href="#servicios"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("servicios");
+            }}
+          >
+            Servicios
+          </a>
+
+          <a
+            href="#comparador"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("comparador");
+            }}
+          >
+            Comparar
+          </a>
+
+          <a
+            href="#proyectos"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("proyectos");
+            }}
+          >
             Proyectos
           </a>
 
-          <a href="#equipo" onClick={() => setMenuOpen(false)}>
+          <a
+            href="#proceso"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("proceso");
+            }}
+          >
+            Proceso
+          </a>
+
+          <a
+            href="#testimonios"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("testimonios");
+            }}
+          >
+            Opiniones
+          </a>
+
+          <a
+            href="#equipo"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("equipo");
+            }}
+          >
             Equipo
+          </a>
+
+          <a
+            href="#preguntas"
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("preguntas");
+            }}
+          >
+            FAQ
           </a>
 
           <a
             className="nav-contact"
             href="#contacto"
-            onClick={() => setMenuOpen(false)}
+            onClick={(event) => {
+              event.preventDefault();
+              goToSection("contacto");
+            }}
           >
             Contacto <ArrowUpRight size={15} aria-hidden="true" />
           </a>
@@ -114,10 +230,21 @@ export default function App() {
       </header>
 
       {selectedProject ? (
-        <ProjectDetail project={selectedProject} onBack={goToProjects} />
+        <ProjectDetail
+          project={selectedProject}
+          onBack={() => goToSection("proyectos")}
+        />
+      ) : selectedService ? (
+        <ServicioDetalle
+          servicio={selectedService}
+          onBack={backToServices}
+          whatsapp={WHATSAPP_1}
+          correo={CORREO}
+        />
       ) : (
         <>
           <main>
+            {/* HERO */}
             <section className="hero" id="inicio">
               <div className="hero-content">
                 <span className="eyebrow">
@@ -135,20 +262,20 @@ export default function App() {
                 </p>
 
                 <div className="hero-actions">
-                  <a className="button button-primary" href="#proyectos">
-                    Explorar proyectos{" "}
+                  <a className="button button-primary" href="#servicios">
+                    Conocer servicios{" "}
                     <ArrowUpRight size={17} aria-hidden="true" />
                   </a>
 
-                  <a className="button button-secondary" href="#equipo">
-                    Conocer al equipo
+                  <a className="button button-secondary" href="#proyectos">
+                    Explorar proyectos
                   </a>
                 </div>
 
                 <div className="hero-stats">
                   <div>
-                    <strong>08</strong>
-                    <span>Proyectos</span>
+                    <strong>07</strong>
+                    <span>Servicios</span>
                   </div>
 
                   <div>
@@ -163,27 +290,210 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="hero-visual" aria-hidden="true">
-                <div className="hero-glow" />
-                <div className="orbit orbit-one" />
-                <div className="orbit orbit-two" />
-                <div className="orbit orbit-three" />
+              {/* IMAGEN PRINCIPAL DEL HERO */}
+              <div className="hero-visual hero-visual-model" aria-hidden="true">
+                <div className="hero-model-glow" />
 
-                <div className="tech-core">
-                  <img
-                    className="hero-company-logo"
-                    src={LOGO_SIN_TEXTO}
-                    alt=""
-                  />
-                </div>
-
-                <span className="floating-chip chip-one">{"</>"}</span>
-                <span className="floating-chip chip-two">{"{ TS }"}</span>
-                <span className="floating-chip chip-three">UI / UX</span>
-                <span className="floating-chip chip-four">WEB</span>
+                <img
+                  src="/images/hero-modelo.png"
+                  alt=""
+                  className="hero-model-image"
+                  fetchPriority="high"
+                />
               </div>
             </section>
 
+            {/* SERVICIOS */}
+            <section className="section services-section" id="servicios">
+              <div className="section-heading">
+                <div>
+                  <span className="eyebrow">
+                    SOLUCIONES PARA TU NEGOCIO
+                  </span>
+                  <h2>Servicios y soluciones digitales.</h2>
+                </div>
+
+                <p>
+                  Conoce nuestras opciones, alcances y precios referenciales.
+                  Cada proyecto se ajusta a tus necesidades.
+                </p>
+              </div>
+
+              <div className="service-grid">
+                {servicios.map((servicio, index) => {
+                  const Icon = iconosServicio[index] ?? Code2;
+
+                  return (
+                    <button
+                      className="service-card"
+                      type="button"
+                      key={servicio.id}
+                      onClick={() => setSelectedServiceId(servicio.id)}
+                      aria-label={`Ver detalles de ${servicio.nombre}`}
+                    >
+                      <div className="service-card-image">
+                        <img
+                          src={servicio.imagen}
+                          alt={`Imagen de ${servicio.nombre}`}
+                          loading="lazy"
+                        />
+
+                        <span className="service-card-image-number">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      <span className="service-icon">
+                        <Icon size={24} />
+                      </span>
+
+                      <span className="service-index">
+                        SERVICIO {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <h3>{servicio.nombre}</h3>
+                      <p>{servicio.resumen}</p>
+
+                      <span className="service-price-label">Desde</span>
+
+                      <strong className="service-price">
+                        S/ {servicio.precio.toLocaleString("es-PE")}
+                      </strong>
+
+                      <span className="service-card-link">
+                        Ver características <ArrowUpRight size={16} />
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="services-note">
+                <strong>Precios referenciales.</strong> El costo final depende
+                del alcance, las funcionalidades y los recursos externos que
+                requiera cada proyecto.
+              </div>
+
+              {/* TÉRMINOS Y CONDICIONES GENERALES */}
+              <div className="services-terms">
+                <div className="services-terms-heading">
+                  <span className="eyebrow">INFORMACIÓN IMPORTANTE</span>
+                  <h3>Términos y condiciones generales</h3>
+                  <p>
+                    Estas condiciones se aplican a los servicios ofrecidos por
+                    World Technology System, salvo que se acuerde algo distinto
+                    por escrito.
+                  </p>
+                </div>
+
+                <div className="services-terms-grid">
+                  <article>
+                    <span>01</span>
+                    <div>
+                      <strong>Forma de pago</strong>
+                      <p>
+                        Se solicita un adelanto del 50% para iniciar el
+                        proyecto y el 50% restante contra entrega.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>02</span>
+                    <div>
+                      <strong>Modificaciones</strong>
+                      <p>
+                        Se consideran hasta 2 rondas de modificaciones dentro
+                        del alcance previamente aprobado.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>03</span>
+                    <div>
+                      <strong>Contenido del proyecto</strong>
+                      <p>
+                        El cliente proporciona textos, imágenes, logotipos y
+                        demás materiales, salvo acuerdo distinto.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>04</span>
+                    <div>
+                      <strong>Plazos de entrega</strong>
+                      <p>
+                        El tiempo de desarrollo se define según la complejidad
+                        del proyecto y la entrega oportuna de los materiales.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>05</span>
+                    <div>
+                      <strong>Dominio y servicios externos</strong>
+                      <p>
+                        Dominio, hosting comercial, licencias y servicios de
+                        terceros no están incluidos, salvo que se indiquen en
+                        la cotización.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>06</span>
+                    <div>
+                      <strong>Alcance y adicionales</strong>
+                      <p>
+                        Las nuevas funcionalidades, integraciones o cambios
+                        fuera del alcance acordado se cotizan por separado.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>07</span>
+                    <div>
+                      <strong>Mantenimiento</strong>
+                      <p>
+                        El mantenimiento es opcional. La tarifa inicial es de
+                        S/ 75 mensuales e incluye únicamente revisión general,
+                        correcciones menores, actualizaciones sencillas de
+                        información y soporte técnico básico.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article>
+                    <span>08</span>
+                    <div>
+                      <strong>Entrega y publicación</strong>
+                      <p>
+                        La publicación inicial se realiza según las
+                        características técnicas del proyecto. Los costos de
+                        infraestructura y servicios externos se asumen por
+                        separado.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+
+                <p className="services-terms-footer">
+                  Cada cotización especificará el alcance, precio, entregables
+                  y condiciones particulares del proyecto antes de comenzar.
+                </p>
+              </div>
+            </section>
+
+            {/* COMPARADOR */}
+            <ComparadorServicios
+              onSelectService={(id) => setSelectedServiceId(id)}
+            />
+
+            {/* PROYECTOS */}
             <section className="section projects-section" id="proyectos">
               <div className="section-heading">
                 <div>
@@ -261,6 +571,13 @@ export default function App() {
               </div>
             </section>
 
+            {/* PROCESO DE TRABAJO */}
+            <ProcesoTrabajo />
+
+            {/* TESTIMONIOS */}
+            <Testimonios />
+
+            {/* EQUIPO */}
             <section className="section team-section" id="equipo">
               <div className="team-layout">
                 <div className="team-intro">
@@ -313,7 +630,7 @@ export default function App() {
 
                       <a
                         className="developer-button"
-                        href="https://portafolio-hq.vercel.app/"
+                        href={PORTAFOLIO_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -392,6 +709,10 @@ export default function App() {
               </p>
             </section>
 
+            {/* PREGUNTAS FRECUENTES */}
+            <PreguntasFrecuentes />
+
+            {/* CONTACTO */}
             <section className="section contact-section" id="contacto">
               <div className="contact-panel">
                 <div>
@@ -412,9 +733,9 @@ export default function App() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <MessageCircle size={18} aria-hidden="true" />
+                    <MessageCircle size={18} />
                     WhatsApp 1
-                    <ArrowUpRight size={17} aria-hidden="true" />
+                    <ArrowUpRight size={17} />
                   </a>
 
                   <a
@@ -423,15 +744,15 @@ export default function App() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <MessageCircle size={18} aria-hidden="true" />
+                    <MessageCircle size={18} />
                     WhatsApp 2
-                    <ArrowUpRight size={17} aria-hidden="true" />
+                    <ArrowUpRight size={17} />
                   </a>
 
                   <a className="button button-secondary" href={URL_CORREO}>
-                    <Mail size={18} aria-hidden="true" />
+                    <Mail size={18} />
                     Enviar correo
-                    <ArrowUpRight size={17} aria-hidden="true" />
+                    <ArrowUpRight size={17} />
                   </a>
                 </div>
               </div>
@@ -442,7 +763,7 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MessageCircle size={20} aria-hidden="true" />
+                  <MessageCircle size={20} />
                   <span>
                     <strong>WhatsApp</strong>
                     <small>+51 964 618 454</small>
@@ -454,7 +775,7 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MessageCircle size={20} aria-hidden="true" />
+                  <MessageCircle size={20} />
                   <span>
                     <strong>WhatsApp</strong>
                     <small>+51 959 349 818</small>
@@ -462,7 +783,7 @@ export default function App() {
                 </a>
 
                 <a href={URL_CORREO}>
-                  <Mail size={20} aria-hidden="true" />
+                  <Mail size={20} />
                   <span>
                     <strong>Correo electrónico</strong>
                     <small>{CORREO}</small>
@@ -472,11 +793,15 @@ export default function App() {
             </section>
           </main>
 
+          {/* FOOTER */}
           <footer className="site-footer">
             <a
               className="brand footer-brand"
               href="#inicio"
-              onClick={goHome}
+              onClick={(event) => {
+                event.preventDefault();
+                goHome();
+              }}
             >
               <img
                 className="brand-logo-full"
